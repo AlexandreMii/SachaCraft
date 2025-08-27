@@ -6,54 +6,101 @@
   <style>
     body {
       margin: 0;
-      background: skyblue;
-      font-family: monospace;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #87CEEB; /* ciel */
+      overflow: hidden;
     }
 
-    .world {
-      display: grid;
-      grid-template-columns: repeat(20, 40px);
-      grid-template-rows: repeat(10, 40px);
+    #game {
+      position: relative;
+      width: 800px;
+      height: 400px;
+      background: #4CAF50; /* herbe */
+      border: 5px solid #333;
+      overflow: hidden;
     }
 
-    .block {
+    /* Sol */
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 50px;
+      background: #3e2c1c;
+    }
+
+    /* Personnage */
+    #player {
+      position: absolute;
+      bottom: 50px; /* posé sur le sol */
+      left: 50px;
       width: 40px;
       height: 40px;
+      background: #FFD700;
+      border: 2px solid #333;
     }
-
-    .grass { background: green; }
-    .dirt { background: sienna; }
-    .stone { background: gray; }
-    .sky { background: skyblue; }
   </style>
 </head>
 <body>
-  <h1 style="text-align:center;">🌍 Bienvenue sur SachaCraft</h1>
-  <div class="world">
-    <!-- Ciel -->
-    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
-    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
-    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
-    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
-
-    <!-- Herbe -->
-    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
-    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
-    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
-    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
-
-    <!-- Terre -->
-    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
-    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
-    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
-    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
-
-    <!-- Pierre -->
-    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
-    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
-    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
-    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
+  <div id="game">
+    <div id="player"></div>
+    <div class="ground"></div>
   </div>
+
+  <script>
+    const player = document.getElementById("player");
+    const game = document.getElementById("game");
+
+    let x = 50;
+    let y = 50;
+    let speed = 5;
+    let jumping = false;
+    let velocityY = 0;
+    const gravity = 0.8;
+
+    // Contrôles clavier
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "d") {
+        x += speed;
+      }
+      if (e.key === "ArrowLeft" || e.key === "q") {
+        x -= speed;
+      }
+      if ((e.key === "ArrowUp" || e.key === "z") && !jumping) {
+        velocityY = -12;
+        jumping = true;
+      }
+    });
+
+    function update() {
+      // gravité
+      velocityY += gravity;
+      y += velocityY;
+
+      // sol
+      if (y < 50) {
+        y = 50;
+        velocityY = 0;
+        jumping = false;
+      }
+
+      // limites écran
+      if (x < 0) x = 0;
+      if (x > game.offsetWidth - player.offsetWidth) {
+        x = game.offsetWidth - player.offsetWidth;
+      }
+
+      // appliquer position
+      player.style.left = x + "px";
+      player.style.bottom = y + "px";
+
+      requestAnimationFrame(update);
+    }
+
+    update();
+  </script>
 </body>
 </html>
-
