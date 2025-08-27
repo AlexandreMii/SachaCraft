@@ -1,11 +1,59 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>SachaCraft</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>SachaCraft</title>
+  <style>
+    body {
+      margin: 0;
+      background: skyblue;
+      font-family: monospace;
+    }
+
+    .world {
+      display: grid;
+      grid-template-columns: repeat(20, 40px);
+      grid-template-rows: repeat(10, 40px);
+    }
+
+    .block {
+      width: 40px;
+      height: 40px;
+    }
+
+    .grass { background: green; }
+    .dirt { background: sienna; }
+    .stone { background: gray; }
+    .sky { background: skyblue; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">🌍 Bienvenue sur SachaCraft</h1>
+  <div class="world">
+    <!-- Ciel -->
+    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
+    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
+    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
+    <div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div><div class="sky"></div>
+
+    <!-- Herbe -->
+    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
+    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
+    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
+    <div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div><div class="grass"></div>
+
+    <!-- Terre -->
+    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
+    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
+    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
+    <div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div><div class="dirt"></div>
+
+    <!-- Pierre -->
+    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
+    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
+    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
+    <div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div><div class="stone"></div>
+  </div>
+</body>
 </html>
+
